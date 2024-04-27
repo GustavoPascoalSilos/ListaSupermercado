@@ -1,8 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-
+﻿
+using System.Reflection;
 
 int QTE = 0;
+string item = "";
+
 
 //Solicitar o tamanho da lista
 Console.WriteLine("Quantos itens sua lista possuirá? ");
@@ -16,43 +17,42 @@ string[] lista = new string[QTE];
 for (int i = 0; i < QTE; i++)
 {
     Console.WriteLine($"{i + 1}° item da lista ");
-    lista[i] = Console.ReadLine();
-    Console.Clear();
-
-
-    // verifica se os itens se repetem na lista
+    item = Console.ReadLine();
    
-    string desejaInserir = "";
-    do
+    // Verificar itens repetidos
+    bool  encontrouItem = false;
+    for (int j = 0; j < lista.Length; j++)
     {
-        Console.WriteLine();
-
-        
-        int posicao = 0;
-        bool encontrou = false;
-
-        for (int i = 0; i < lista.Length; i++)
+        if (lista[j] != null)
         {
-            if (lista[i].ToUpper() == 
+            if (item.ToUpper() == lista[j].ToUpper())
             {
-                posicao = i;
-                encontrou = true;
+                encontrouItem = true;
             }
         }
+    }
 
-        if (encontrou)
-            Console.WriteLine();
-        else
-            Console.WriteLine();
+    if (!encontrouItem)
 
-        Console.WriteLine("Deseja inserir novamente? (s/n)");
-        desejaInserir = Console.ReadLine();
-    } while (desejaInserir != "n");
+        lista[i] = item;
+    else
+    {
+        
+        Console.WriteLine("Não é possivel adicionar o mesmo item!");
+        i--;
+    }
+
 }
-
-
-//imprime a lista 
-for (int i = 0; i < QTE; i++)
+// imprime os itens da lista
+Console.Clear();
+Console.WriteLine("LISTA DE ITENS");
+for (int i = 0;i < lista.Length;i++)
 {
-    Console.WriteLine($"{i + 1}°{lista[i]} ");
+    Console.WriteLine($"{i+1}°{lista[i]}");
 }
+
+   
+
+
+
+
